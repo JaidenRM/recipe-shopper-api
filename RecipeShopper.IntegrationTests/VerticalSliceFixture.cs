@@ -169,7 +169,7 @@ public class VerticalSliceFixture : IAsyncLifetime
     }
 
     // Cleans database
-    private async Task ResetCheckpoint()
+    public async Task ResetCheckpoint()
     {
         using (var conn = new NpgsqlConnection(_config.GetConnectionString("DevTest")))
         {
@@ -181,9 +181,9 @@ public class VerticalSliceFixture : IAsyncLifetime
 
     public Task InitializeAsync() => ResetCheckpoint();
 
-    public Task DisposeAsync()
+    public async Task DisposeAsync()
     {
+        await ResetCheckpoint();
         _factory?.Dispose();
-        return Task.CompletedTask;
     }
 }

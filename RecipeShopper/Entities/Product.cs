@@ -2,6 +2,7 @@
 {
     public class Product : IEntity
     {
+        //TODO: Change to Guid for better security against delete etc?
         public int Id { get; set; }
         public string Name { get; set; }
         //public int Quantity { get; set; }
