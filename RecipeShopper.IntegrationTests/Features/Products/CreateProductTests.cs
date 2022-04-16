@@ -23,10 +23,7 @@ namespace RecipeShopper.IntegrationTests.Features.Products
 
             var prod = await _fixture.FindAsync<Product>(cmd.Id);
 
-            prod.Id.ShouldBe(cmd.Id);
-            prod.Name.ShouldBe(cmd.Name);
-            prod.FullPrice.ShouldBe(cmd.FullPrice);
-            prod.CurrentPrice.ShouldBe(cmd.CurrentPrice);
+            prod.Id.ShouldBeEquivalentTo(cmd.Id);
         }
 
         [Fact]

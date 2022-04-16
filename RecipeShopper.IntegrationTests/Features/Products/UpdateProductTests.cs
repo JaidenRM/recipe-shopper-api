@@ -24,9 +24,6 @@ namespace RecipeShopper.IntegrationTests.Features.Products
 
             result.Results.Count.ShouldBe(1);
             result.Results[0].Id.ShouldBe(createCmd.Id);
-            result.Results[0].Name.ShouldBe(createCmd.Name);
-            result.Results[0].FullPrice.ShouldBe(createCmd.FullPrice);
-            result.Results[0].CurrentPrice.ShouldBe(createCmd.CurrentPrice);
 
             var updateCmd = new UpdateProduct.Command(createCmd.Id, "Pork Belly 1kg", 22M, 20M);
             await _fixture.SendAsync(updateCmd);
@@ -35,10 +32,7 @@ namespace RecipeShopper.IntegrationTests.Features.Products
             var updatedResult = updatedQuery.Results[0];
 
             result.Results.Count.ShouldBe(1);
-            result.Results[0].Id.ShouldBe(updatedResult.Id);
-            result.Results[0].Name.ShouldBe(updatedResult.Name);
-            result.Results[0].FullPrice.ShouldBe(updatedResult.FullPrice);
-            result.Results[0].CurrentPrice.ShouldBe(updatedResult.CurrentPrice);
+            result.Results[0].ShouldBeEquivalentTo(updatedResult);
 
         }
 

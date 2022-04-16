@@ -1,9 +1,12 @@
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using RecipeShopper.Application.Interfaces;
 using RecipeShopper.Application.Middlewares;
 using RecipeShopper.Application.Pipelines;
 using RecipeShopper.Data;
+using RecipeShopper.Infrastructure.Services;
+using RecipeShopper.Infrastructure.Supermarkets.Woolworths;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +14,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddControllers()
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
+
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviorPipeline<,>));
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
+builder.Services.AddTransient<ISupermarket, WoolworthsService>();
+builder.Services.AddTransient<SupermarketService>();
+builder.Services.AddHttpClient<ISupermarket, WoolworthsService>();
+
 builder.Services.AddDbContext<RecipeShopperContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Dev")));
 builder.Services.AddMediatR(typeof(Program));
