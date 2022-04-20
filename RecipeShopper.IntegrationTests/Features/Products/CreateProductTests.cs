@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Shouldly;
 using FluentValidation;
+using RecipeShopper.Domain.Enums;
 
 namespace RecipeShopper.IntegrationTests.Features.Products
 {
@@ -17,36 +18,23 @@ namespace RecipeShopper.IntegrationTests.Features.Products
         [Fact]
         public async Task Should_create_product()
         {
-            var cmd = new CreateProduct.Command(458, "Gummy Bears", 2.00M, 2.00M);
+            var cmd = new CreateProduct.Command(458, SupermarketType.Woolworths, "Gummy Bears");
 
             await _fixture.SendAsync(cmd);
 
-            var prod = await _fixture.FindAsync<Product>(cmd.Id);
+            var prod = await _fixture.FindAsync<Product>(cmd.Id, (int)cmd.SupermarketType);
 
             prod.Id.ShouldBeEquivalentTo(cmd.Id);
         }
 
-        [Fact]
-        public async Task Should_not_create_product_with_current_price_higher_than_full_price()
-        {
-            var cmd = new CreateProduct.Command(123, "Apples", 2.00M, 4.00M);
-            var sendCmd = async () => await _fixture.SendAsync(cmd);
-
-            await sendCmd.ShouldThrowAsync<ValidationException>();
-
-            var prod = await _fixture.FindAsync<Product>(cmd.Id);
-
-            prod.ShouldBeNull();
-        }
-
         public async Task Should_not_create_empty_product()
         {
-            var cmd = new CreateProduct.Command(0, "", 0, 0);
+            var cmd = new CreateProduct.Command(0, 0, "");
             var sendCmd = async () => await _fixture.SendAsync(cmd);
 
             await sendCmd.ShouldThrowAsync<ValidationException>();
 
-            var prod = await _fixture.FindAsync<Product>(cmd.Id);
+            var prod = await _fixture.FindAsync<Product>(cmd.Id, (int)cmd.SupermarketType);
 
             prod.ShouldBeNull();
         }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RecipeShopper.Domain;
+using RecipeShopper.Domain.Enums;
 
 namespace RecipeShopper.Infrastructure.Supermarkets.Woolworths
 {
@@ -19,7 +20,10 @@ namespace RecipeShopper.Infrastructure.Supermarkets.Woolworths
                     opt => opt.MapFrom(src => src.Price ?? 0))
                 .ForCtorParam(
                     "fullPrice",
-                    opt => opt.MapFrom(src => src.WasPrice ?? 0));
+                    opt => opt.MapFrom(src => src.WasPrice ?? 0))
+                .ForCtorParam(
+                    "supermarket",
+                    opt => opt.MapFrom(src => new Supermarket(SupermarketType.Woolworths, SupermarketType.Woolworths.ToFriendlyString())));
         }
     }
 }

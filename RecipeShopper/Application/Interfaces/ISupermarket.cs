@@ -1,4 +1,4 @@
-﻿using RecipeShopper.Application.Enums;
+﻿using RecipeShopper.Domain.Enums;
 using RecipeShopper.Domain;
 
 namespace RecipeShopper.Application.Interfaces

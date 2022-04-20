@@ -1,4 +1,4 @@
-﻿using RecipeShopper.Application.Enums;
+﻿using RecipeShopper.Domain.Enums;
 using RecipeShopper.Features.Supermarket;
 using Shouldly;
 using System.Threading.Tasks;
