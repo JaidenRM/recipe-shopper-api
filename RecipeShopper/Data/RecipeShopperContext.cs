@@ -16,6 +16,13 @@ namespace RecipeShopper.Data
         }
 
         public DbSet<Product> Products => Set<Product>();
+        public DbSet<Supermarket> Supermarket => Set<Supermarket>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
+                .HasKey(k => new { k.Id, k.SupermarketId });
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
             => optionsBuilder.UseNpgsql(_config.GetConnectionString("Dev"));

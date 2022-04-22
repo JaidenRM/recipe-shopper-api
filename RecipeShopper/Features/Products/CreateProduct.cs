@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
+using RecipeShopper.Domain.Enums;
 using RecipeShopper.Application.Interfaces;
 using RecipeShopper.Data;
 using RecipeShopper.Entities;
@@ -8,7 +9,7 @@ namespace RecipeShopper.Features.Products
 {
     public class CreateProduct
     {
-        public record Command(int Id, string Name, decimal FullPrice, decimal CurrentPrice) : ICommand<Unit>;
+        public record Command(int Id, SupermarketType SupermarketType, string Name) : ICommand<Unit>;
 
         public class Validator : AbstractValidator<Command>
         {
@@ -16,8 +17,7 @@ namespace RecipeShopper.Features.Products
             {
                 RuleFor(m => m.Id).NotEmpty();
                 RuleFor(m => m.Name).NotEmpty();
-                RuleFor(m => m.FullPrice).GreaterThan(0);
-                RuleFor(m => m.CurrentPrice).GreaterThan(0).LessThanOrEqualTo(m => m.FullPrice);
+                RuleFor(m => m.SupermarketType).NotEmpty();
             }
         }
 
@@ -32,9 +32,8 @@ namespace RecipeShopper.Features.Products
                 var product = new Product
                 {
                     Id = request.Id,
-                    Name = request.Name,
-                    FullPrice = request.FullPrice,
-                    CurrentPrice = request.CurrentPrice
+                    SupermarketId = (int)request.SupermarketType,
+                    Name = request.Name
                 };
 
                 await _db.Products.AddAsync(product, cancellationToken);

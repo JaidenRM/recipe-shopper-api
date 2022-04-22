@@ -4,6 +4,7 @@ using MediatR;
 using RecipeShopper.Application.Exceptions;
 using RecipeShopper.Application.Interfaces;
 using RecipeShopper.Data;
+using RecipeShopper.Domain.Enums;
 using RecipeShopper.Entities;
 
 namespace RecipeShopper.Features.Products
@@ -11,7 +12,7 @@ namespace RecipeShopper.Features.Products
     public class UpdateProduct
     {
 
-        public record Command(int Id, string Name, decimal FullPrice, decimal CurrentPrice) : ICommand<Unit>;
+        public record Command(int Id, SupermarketType SupermarketType, string Name) : ICommand<Unit>;
 
         public class Validator : AbstractValidator<Command>
         {
@@ -19,8 +20,7 @@ namespace RecipeShopper.Features.Products
             {
                 RuleFor(m => m.Id).GreaterThan(0);
                 RuleFor(m => m.Name).NotEmpty();
-                RuleFor(m => m.FullPrice).GreaterThanOrEqualTo(0);
-                RuleFor(m => m.CurrentPrice).GreaterThanOrEqualTo(0).LessThanOrEqualTo(m => m.FullPrice);
+                RuleFor(m => m.SupermarketType).NotEmpty();
             }
         }
 
@@ -42,7 +42,7 @@ namespace RecipeShopper.Features.Products
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var toUpdate = await _db.Products.FindAsync(request.Id);
+                var toUpdate = await _db.Products.FindAsync(request.Id, (int)request.SupermarketType);
 
                 if (toUpdate == null) throw new RecordNotFoundException("Could not find the record to update");
 

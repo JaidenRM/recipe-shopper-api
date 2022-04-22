@@ -4,13 +4,14 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RecipeShopper.Application.Interfaces;
 using RecipeShopper.Data;
+using RecipeShopper.Domain.Enums;
 using RecipeShopper.Entities;
 
 namespace RecipeShopper.Features.Products
 {
     public class DeleteProduct
     {
-        public record Command(int Id) : ICommand<Unit>;
+        public record Command(int Id, SupermarketType SupermarketType) : ICommand<Unit>;
 
         public class Validation : AbstractValidator<Command>
         {
@@ -35,7 +36,7 @@ namespace RecipeShopper.Features.Products
 
             public async Task<Unit> Handle(Command message, CancellationToken token)
             {
-                var toDelete = await _db.Products.FindAsync(message.Id);
+                var toDelete = await _db.Products.FindAsync(message.Id, (int)message.SupermarketType);
                 
                 if (toDelete != null) _db.Products.Remove(toDelete);
 

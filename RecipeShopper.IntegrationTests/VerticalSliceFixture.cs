@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using RecipeShopper.Data;
+using RecipeShopper.Domain.Enums;
 using RecipeShopper.Entities;
 using Respawn;
 using Xunit;
@@ -147,6 +144,12 @@ public class VerticalSliceFixture : IAsyncLifetime
         return ExecuteDbContextAsync(db => db.Set<T>().FindAsync(id).AsTask());
     }
 
+    public Task<T> FindAsync<T>(int id1, int id2)
+        where T : class, IEntity
+    {
+        return ExecuteDbContextAsync(db => db.Set<T>().FindAsync(id1, id2).AsTask());
+    }
+
     public Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
     {
         return ExecuteScopeAsync(sp =>
@@ -176,7 +179,17 @@ public class VerticalSliceFixture : IAsyncLifetime
             await conn.OpenAsync();
 
             await _checkpoint.Reset(conn);
+            await InitDb();
         }
+    }
+
+    private async Task InitDb()
+    {
+        var supermarket = new Supermarket();
+        supermarket.Name = SupermarketType.Woolworths.ToFriendlyString();
+        supermarket.Id = (int)SupermarketType.Woolworths;
+        
+        await InsertAsync(supermarket);
     }
 
     public Task InitializeAsync() => ResetCheckpoint();
