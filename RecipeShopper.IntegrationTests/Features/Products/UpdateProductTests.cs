@@ -5,6 +5,7 @@ using RecipeShopper.Features.Products;
 using RecipeShopper.Application.Exceptions;
 using RecipeShopper.Domain.Enums;
 using System.Collections.Generic;
+using RecipeShopper.Entities;
 
 namespace RecipeShopper.IntegrationTests.Features.Products
 {
@@ -18,26 +19,19 @@ namespace RecipeShopper.IntegrationTests.Features.Products
         [Fact]
         public async Task Should_update_product()
         {
-            var createCmd = new CreateProduct.Command(378, SupermarketType.Woolworths, "Pork Belly 500g");
-            var idBySupermarketId = new Dictionary<int, int[]>() { { (int)SupermarketType.Woolworths, new[] { createCmd.Id } } };
+            var product = new Product
+            {
+                Id = 378,
+                SupermarketId = (int)SupermarketType.Woolworths,
+                Name = "Pork Belly 500g"
+            };
+            await _fixture.InsertAsync(product);
 
-            await _fixture.SendAsync(createCmd);
-
-            var getQuery = new GetProducts.Query(idBySupermarketId);
-            var result = await _fixture.SendAsync(getQuery);
-
-            result.Results.Count.ShouldBe(1);
-            result.Results[0].Id.ShouldBe(createCmd.Id);
-
-            var updateCmd = new UpdateProduct.Command(createCmd.Id, SupermarketType.Woolworths, "Pork Belly 1kg");
+            var updateCmd = new UpdateProduct.Command(product.Id, SupermarketType.Woolworths, "Pork Belly 1kg");
             await _fixture.SendAsync(updateCmd);
 
-            var updatedQuery = await _fixture.SendAsync(getQuery);
-            var updatedResult = updatedQuery.Results[0];
-
-            result.Results.Count.ShouldBe(1);
-            result.Results[0].ShouldBeEquivalentTo(updatedResult);
-
+            var dbProd = await _fixture.FindAsync<Product>(product.Id, product.SupermarketId);
+            dbProd.Name.ShouldBe(updateCmd.Name);
         }
 
         [Fact]

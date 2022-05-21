@@ -44,9 +44,9 @@ namespace RecipeShopper.Features.Products
             {
                 var toUpdate = await _db.Products.FindAsync(request.Id, (int)request.SupermarketType);
 
-                if (toUpdate == null) throw new RecordNotFoundException("Could not find the record to update");
+                if (toUpdate == null) throw new RecordNotFoundException($"Could not find the record with id ({request.Id}) to update");
 
-                toUpdate = _mapper.Map<Product>(request);
+                _mapper.Map(request, toUpdate);
                 await _db.SaveChangesAsync();
 
                 return default;

@@ -4,7 +4,7 @@ using Shouldly;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace RecipeShopper.IntegrationTests.Features.Supermarket
+namespace RecipeShopper.IntegrationTests.Features.Supermarkets
 {
     [Collection(nameof(VerticalSliceFixture))]
     public class SearchSupermarketTests

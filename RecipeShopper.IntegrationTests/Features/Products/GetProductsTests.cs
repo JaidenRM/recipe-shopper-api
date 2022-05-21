@@ -24,18 +24,14 @@ namespace RecipeShopper.IntegrationTests.Features.Products
             {
                 Id = 555,
                 Name = "Lean Mince 800g",
-                SupermarketId = supermarketId,
-                //CurrentPrice = 14.95M,
-                //FullPrice = 14.95M,
+                SupermarketId = supermarketId
             };
 
             var prod2 = new Product
             {
                 Id = 777,
                 Name = "Tim Tam's",
-                SupermarketId = supermarketId,
-                //CurrentPrice = 2.99M,
-                //FullPrice = 3.99M,
+                SupermarketId = supermarketId
             };
 
             await _fixture.InsertAsync(prod1, prod2);
@@ -58,27 +54,21 @@ namespace RecipeShopper.IntegrationTests.Features.Products
             {
                 Id = 321,
                 Name = "Muesli",
-                SupermarketId = supermarketId,
-                //CurrentPrice = 4.25M,
-                //FullPrice = 5.20M,
+                SupermarketId = supermarketId
             };
 
             var prod2 = new Product
             {
                 Id = 256,
                 Name = "Bag of potatoes",
-                SupermarketId = supermarketId,
-                //CurrentPrice = 6.6M,
-                // FullPrice = 6.6M,
+                SupermarketId = supermarketId
             };
 
             var prod3 = new Product
             {
                 Id = 839,
                 Name = "Bread",
-                SupermarketId = supermarketId,
-                //CurrentPrice = 2.95M,
-                //FullPrice = 3.65M,
+                SupermarketId = supermarketId
             };
 
             await _fixture.InsertAsync(prod1, prod2, prod3);
