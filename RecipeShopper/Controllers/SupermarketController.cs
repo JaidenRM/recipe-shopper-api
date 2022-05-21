@@ -27,7 +27,7 @@ namespace RecipeShopper.Controllers
             var query = new SearchSupermarket.Query(searchTerm, new[] { supermarketType });
             var resp = await _mediator.Send(query);
 
-            return resp.ProductsBySupermarketDict[supermarketType];
+            return Ok(resp.ProductsBySupermarketDict[supermarketType]);
         }
     }
 }

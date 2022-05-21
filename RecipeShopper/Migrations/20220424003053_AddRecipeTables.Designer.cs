@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RecipeShopper.Data;
@@ -11,9 +12,10 @@ using RecipeShopper.Data;
 namespace RecipeShopper.Migrations
 {
     [DbContext(typeof(RecipeShopperContext))]
-    partial class RecipeShopperContextModelSnapshot : ModelSnapshot
+    [Migration("20220424003053_AddRecipeTables")]
+    partial class AddRecipeTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,8 +38,8 @@ namespace RecipeShopper.Migrations
                     b.Property<int?>("ProductId")
                         .HasColumnType("integer");
 
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("numeric");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
 
                     b.Property<int>("RecipeId")
                         .HasColumnType("integer");
@@ -111,16 +113,16 @@ namespace RecipeShopper.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedOnUTC")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int>("DurationMinutes")
+                    b.Property<int>("Duration")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("LastModifiedUTC")
+                    b.Property<DateTime>("LastModified")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
