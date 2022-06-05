@@ -49,10 +49,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 123456,
                             Name = "Potato",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies"
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     }
                 },
@@ -101,10 +98,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 5346,
                             Name = "Celery",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies"
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     },
                     new Ingredient
@@ -116,10 +110,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 845425,
                             Name = "Stock - Vegetable",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies"
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     }
                 },
@@ -167,10 +158,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 423566,
                             Name = "Toast White Bread",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies",
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     },
                     new Ingredient
@@ -182,10 +170,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 65344,
                             Name = "Western Star Butter",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies",
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     },
                     new Ingredient
@@ -264,10 +249,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 123456,
                             Name = "Potato",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies"
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     }
                 },
@@ -316,10 +298,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 5346,
                             Name = "Celery",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies"
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     },
                     new Ingredient
@@ -331,10 +310,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 845425,
                             Name = "Stock - Vegetable",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies"
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     }
                 },
@@ -382,10 +358,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 423566,
                             Name = "Toast White Bread",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies",
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     },
                     new Ingredient
@@ -397,10 +370,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 65344,
                             Name = "Western Star Butter",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies",
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     },
                     new Ingredient
@@ -479,10 +449,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 123456,
                             Name = "Potato",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies"
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     }
                 },
@@ -531,10 +498,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 5346,
                             Name = "Celery",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies"
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     },
                     new Ingredient
@@ -546,10 +510,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 845425,
                             Name = "Stock - Vegetable",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies"
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     }
                 },
@@ -597,10 +558,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 423566,
                             Name = "Toast White Bread",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies",
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     },
                     new Ingredient
@@ -612,10 +570,7 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
                         {
                             Id = 65344,
                             Name = "Western Star Butter",
-                            Supermarket = new Entities.Supermarket
-                            {
-                                Name = "Woolies",
-                            }
+                            SupermarketId = (int) SupermarketType.Woolworths,
                         }
                     },
                     new Ingredient

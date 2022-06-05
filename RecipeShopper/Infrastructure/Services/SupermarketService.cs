@@ -6,9 +6,9 @@ namespace RecipeShopper.Infrastructure.Services
 {
     public class SupermarketService
     {
-        private readonly Dictionary<SupermarketType, ISupermarket> _availableSupermarketServicesDict = new Dictionary<SupermarketType, ISupermarket>();
+        private readonly Dictionary<SupermarketType, ISupermarketService> _availableSupermarketServicesDict = new Dictionary<SupermarketType, ISupermarketService>();
 
-        public SupermarketService(IEnumerable<ISupermarket> supermarketServices)
+        public SupermarketService(IEnumerable<ISupermarketService> supermarketServices)
         {
             foreach(var service in supermarketServices)
             {

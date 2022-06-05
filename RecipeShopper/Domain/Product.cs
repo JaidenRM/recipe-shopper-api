@@ -1,6 +1,4 @@
-﻿using RecipeShopper.Domain.Helpers;
-
-namespace RecipeShopper.Domain
+﻿namespace RecipeShopper.Domain
 {
     public class Product
     {

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RecipeShopper.Application.Extensions;
@@ -7,7 +7,6 @@ using RecipeShopper.Data;
 using RecipeShopper.Domain.Enums;
 using RecipeShopper.Entities;
 using RecipeShopper.Features.Supermarket;
-using IConfigurationProvider = AutoMapper.IConfigurationProvider;
 
 namespace RecipeShopper.Features.Products
 {
@@ -18,12 +17,13 @@ namespace RecipeShopper.Features.Products
         public record Query(Dictionary<int, int[]> IdsBySupermarketId) : IQuery<Response>;
         public record Model(int Id, string Name, decimal FullPrice, decimal CurrentPrice, int SupermarketId, string SupermarketName);
 
-        public class MappingProfile : Profile 
+        public class Validator : AbstractValidator<Query>
         {
-            public MappingProfile()
+            public Validator()
             {
-                CreateMap<Product, Domain.Product>();
-                CreateMap<Domain.Product, Model>();
+                RuleFor(q => q.IdsBySupermarketId).NotEmpty();
+                RuleFor(q => q.IdsBySupermarketId.Keys.All(sId => Enum.IsDefined(typeof(SupermarketType), sId))).Equal(true).When(q => q.IdsBySupermarketId != null);
+                RuleFor(q => q.IdsBySupermarketId.Values.All(pIds => pIds != null)).Equal(true).When(q => q.IdsBySupermarketId != null);
             }
         }
 
@@ -31,46 +31,39 @@ namespace RecipeShopper.Features.Products
         public class Handler : IQueryHandler<Query, Response>
         {
             private readonly RecipeShopperContext _db;
-            private readonly IMapper _mapper;
             private readonly IMediator _mediator;
 
-            public Handler(RecipeShopperContext dbContext, IConfigurationProvider config, IMapper mapper, IMediator mediator) {
+            public Handler(RecipeShopperContext dbContext, IMediator mediator) {
                 _db = dbContext;
-                _mapper = mapper;
                 _mediator = mediator;
             }
 
             public async Task<Response> Handle(Query request, CancellationToken cancellationToken)
             {
-                var products = _db.Products.ToList();
+                IQueryable<Product> products = _db.Products.Include(p => p.Supermarket);
 
                 if (request.IdsBySupermarketId != null && request.IdsBySupermarketId.Values.Any())
                     products = products
+                        .AsEnumerable()
                         .Where(pro => request.IdsBySupermarketId.ContainsKey(pro.SupermarketId)
                             && request.IdsBySupermarketId.Values.Any(ids => ids.Any(id => id == pro.Id)))
-                        .ToList();
+                        .AsQueryable();
 
-                var domainResults = (await products.SelectAsync(MapFromSupermarketApi)).ToList();
+                var mappedResults = (await products.SelectAsync(MapFromSupermarketApi)).ToList();
 
-                var results = _mapper
-                    .Map<List<Domain.Product>, List<Model>>(domainResults)
-                    .ToList();
-
-                //3. Domain - If data is needed, convert to domain model which will handle all the behavioural stuff
-                return new Response(results);
+                return new Response(mappedResults);
             }
 
-            private async Task<Domain.Product> MapFromSupermarketApi(Product product)
+            private async Task<Model> MapFromSupermarketApi(Product product)
             {
                 var supermarketType = (SupermarketType)product.SupermarketId;
 
                 var query = new SearchSupermarket.Query(product.Id.ToString(), new[] { supermarketType });
                 
                 var result = await _mediator.Send(query);
-                var supermarketProduct = result.ProductsBySupermarketDict[supermarketType].First();
+                var supermarketProduct = result.ProductsBySupermarketDict[supermarketType].FirstOrDefault();
 
-                var domainSupermarket = _mapper.Map<Domain.Supermarket>(product.Supermarket);
-                return new Domain.Product(product.Id, supermarketProduct.Name, supermarketProduct.FullPrice, supermarketProduct.CurrentPrice, domainSupermarket);
+                return new Model(product.Id, product.Name, supermarketProduct?.FullPrice ?? 0, supermarketProduct?.CurrentPrice ?? 0, product.Supermarket.Id, product.Supermarket.Name);
             }
         }
 

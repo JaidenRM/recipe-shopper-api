@@ -17,7 +17,7 @@ namespace RecipeShopper.UnitTests.Services
         [Fact]
         public async Task Null_response_should_return_empty_collection()
         {
-            var mockedSupermarketService = new Mock<ISupermarket>();
+            var mockedSupermarketService = new Mock<ISupermarketService>();
             
             // setup mocks
             mockedSupermarketService
@@ -27,7 +27,7 @@ namespace RecipeShopper.UnitTests.Services
                 .Setup(u => u.GetSupermarketType())
                 .Returns(SupermarketType.Woolworths);
 
-            var supermarketService = new SupermarketService(new List<ISupermarket>() { mockedSupermarketService.Object });
+            var supermarketService = new SupermarketService(new List<ISupermarketService>() { mockedSupermarketService.Object });
             var result = await supermarketService.Search(SupermarketType.Woolworths, "haw haw");
 
             result.ShouldBeNull();
@@ -37,7 +37,7 @@ namespace RecipeShopper.UnitTests.Services
         [Fact]
         public async Task Empty_collection_response_should_return_empty_collection()
         {
-            var mockedSupermarketService = new Mock<ISupermarket>();
+            var mockedSupermarketService = new Mock<ISupermarketService>();
 
             // setup mocks
             mockedSupermarketService
@@ -47,7 +47,7 @@ namespace RecipeShopper.UnitTests.Services
                 .Setup(u => u.GetSupermarketType())
                 .Returns(SupermarketType.Woolworths);
 
-            var supermarketService = new SupermarketService(new List<ISupermarket>() { mockedSupermarketService.Object });
+            var supermarketService = new SupermarketService(new List<ISupermarketService>() { mockedSupermarketService.Object });
             var result = await supermarketService.Search(SupermarketType.Woolworths, "haw haw");
 
             result.ShouldBeEmpty();
@@ -57,7 +57,7 @@ namespace RecipeShopper.UnitTests.Services
         [Fact]
         public async Task Single_product_should_return_collection_still()
         {
-            var mockedSupermarketService = new Mock<ISupermarket>();
+            var mockedSupermarketService = new Mock<ISupermarketService>();
 
             var testSupermarket = new Supermarket(SupermarketType.Woolworths, SupermarketType.Woolworths.ToFriendlyString());
             var testProduct = new Product(1, "Naisuu", 42.69m, 33.33m, testSupermarket);
@@ -70,7 +70,7 @@ namespace RecipeShopper.UnitTests.Services
                 .Setup(u => u.GetSupermarketType())
                 .Returns(SupermarketType.Woolworths);
 
-            var supermarketService = new SupermarketService(new List<ISupermarket>() { mockedSupermarketService.Object });
+            var supermarketService = new SupermarketService(new List<ISupermarketService>() { mockedSupermarketService.Object });
             var result = await supermarketService.Search(SupermarketType.Woolworths, "haw haw");
 
             result.Count.ShouldBe(1);
@@ -81,7 +81,7 @@ namespace RecipeShopper.UnitTests.Services
         [Fact]
         public async Task Multiple_products_should_return_multiple()
         {
-            var mockedSupermarketService = new Mock<ISupermarket>();
+            var mockedSupermarketService = new Mock<ISupermarketService>();
 
             var testSupermarket = new Supermarket(SupermarketType.Woolworths, SupermarketType.Woolworths.ToFriendlyString());
             var testProducts = new List<Product>()
@@ -99,7 +99,7 @@ namespace RecipeShopper.UnitTests.Services
                 .Setup(u => u.GetSupermarketType())
                 .Returns(SupermarketType.Woolworths);
 
-            var supermarketService = new SupermarketService(new List<ISupermarket>() { mockedSupermarketService.Object });
+            var supermarketService = new SupermarketService(new List<ISupermarketService>() { mockedSupermarketService.Object });
             var results = await supermarketService.Search(SupermarketType.Woolworths, "haw haw");
 
             results.Count.ShouldBe(testProducts.Count);

@@ -17,9 +17,9 @@ builder.Services
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviorPipeline<,>));
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
-builder.Services.AddTransient<ISupermarket, WoolworthsService>();
+builder.Services.AddTransient<ISupermarketService, WoolworthsService>();
 builder.Services.AddTransient<SupermarketService>();
-builder.Services.AddHttpClient<ISupermarket, WoolworthsService>();
+builder.Services.AddHttpClient<ISupermarketService, WoolworthsService>();
 
 builder.Services.AddDbContext<RecipeShopperContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Dev")));
@@ -34,6 +34,7 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseMiddleware<ExceptionHandlerMiddleware>();
+app.UseCors(c => c.AllowAnyOrigin());
 //============================
 
 app.Run();

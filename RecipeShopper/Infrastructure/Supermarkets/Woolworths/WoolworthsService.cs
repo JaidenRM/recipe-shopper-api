@@ -5,7 +5,7 @@ using RecipeShopper.Domain;
 
 namespace RecipeShopper.Infrastructure.Supermarkets.Woolworths
 {
-    public class WoolworthsService : ISupermarket
+    public class WoolworthsService : ISupermarketService
     {
         private readonly HttpClient _client;
         private readonly IMapper _mapper;
