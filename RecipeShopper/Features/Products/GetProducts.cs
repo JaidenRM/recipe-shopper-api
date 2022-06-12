@@ -14,8 +14,31 @@ namespace RecipeShopper.Features.Products
     {
         //1. Query/Command - All the data we need to execute
         // Using record instead of class for ease, value-equality and immutability
+        /// <summary>Query for a dictionary of products from supermarket(s). Will return products from each supermarket based on the productIds passed.</summary>
+        /// <param name="IdsBySupermarketId">SupermarketId is used as a key and an array of productIds for values</param>
         public record Query(Dictionary<int, int[]> IdsBySupermarketId) : IQuery<Response>;
-        public record Model(int Id, string Name, decimal FullPrice, decimal CurrentPrice, int SupermarketId, string SupermarketName);
+
+        /// <summary>Represents a product from a specific supermarket in regards to an ingredient in a recipe</summary>
+        public record Model(int Id, string Name, decimal FullPrice, decimal CurrentPrice, int SupermarketId, string SupermarketName)
+        {
+            /// <summary>Represents the id of this product from a specific store</summary>
+            /// <example>123</example>
+            public int Id { get; init; } = Id;
+            /// <summary>Name of the product from the store</summary>
+            /// <example>Bob's All-Natural Tomato Paste</example>
+            public string Name { get; init; } = Name;
+            /// <summary>The normal RRP of the item from this store</summary>
+            /// <example>1.99</example>
+            public decimal FullPrice { get; init; } = FullPrice;
+            /// <summary>The price of the item from the store as of now. Useful for indicating if it is on sale</summary>
+            /// <example>1.49</example>
+            public decimal CurrentPrice { get; init; } = CurrentPrice;
+            /// <summary>The internal id used to track which supermarket this product is from</summary>
+            /// <example>1</example>
+            public int SupermarketId { get; init; } = SupermarketId;
+            /// <example>Bob's Grocer</example>
+            public string SupermarketName { get; init; } = SupermarketName;
+        };
 
         public class Validator : AbstractValidator<Query>
         {

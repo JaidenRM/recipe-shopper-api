@@ -18,6 +18,14 @@ namespace RecipeShopper.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Searches a specific supermarket for the `searchTerm` provided
+        /// </summary>
+        /// <param name="supermarketId">The internal id used to represent a specific supermarket</param>
+        /// <param name="searchTerm">The phrase you wish to search for at the specified supermarket</param>
+        /// <returns>A list of products found at the supermarket based on the `searchTerm`</returns>
+        /// <response code="200">Contains a list of products in the response</response>
+        /// <response code="400">If the specified supermarket is not found</response>
         [HttpGet("{supermarketId:int}/{searchTerm}")]
         public async Task<ActionResult<List<SearchSupermarket.Model>>> SearchSupermarket(int supermarketId, string searchTerm)
         {
