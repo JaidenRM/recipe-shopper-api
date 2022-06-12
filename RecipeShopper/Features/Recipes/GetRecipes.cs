@@ -11,11 +11,70 @@ namespace RecipeShopper.Features.Recipes
 {
     public class GetRecipes
     {
-        public record Query(int[] Ids) : IQuery<Response>;
+        /// <summary>Query for recipes with the passed in ids</summary>
+        public record Query(int[] Ids) : IQuery<Response>
+        {
+            /// <example>[1, 44, 57]</example>
+            public int[] Ids { get; init; } = Ids;
+        }
 
-        public record ModelIngredient(int Id, string Name, decimal Quantity, string MeasurementUnit, GetProducts.Model LinkingProduct);
-        public record ModelInstruction(int Id, int Order, string Description);
-        public record Model(int Id, string Name, string Description, string Tags, int Servings, int DurationMinutes, DateTime LastModifiedUTC, DateTime CreatedOnUTC, List<ModelIngredient> Ingredients, List<ModelInstruction> Instructions);
+        /// <summary>Contains details of a specific ingredient used in this recipe</summary>
+        public record ModelIngredient(int Id, string Name, decimal Quantity, string MeasurementUnit, GetProducts.Model LinkingProduct)
+        {
+            /// <example>1</example>
+            public int Id { get; init; } = Id;
+            /// <example>Tomato Paste</example>
+            public string Name { get; init; } = Name;
+            /// <summary>The amount you want. The unit is determined by `MeasurementUnit`</summary>
+            /// <example>2</example>
+            public decimal Quantity { get; init; } = Quantity;
+            /// <summary>
+            ///     This is used to give meaning to `Quantity` so we know how we can measure it. 
+            ///     Valid values for this include: `"none"`, `"each"`, `"teaspoon"`, `"tablespoon"`, `"grams"`, `"kilograms"`, `"millilitres"`, `"litres"`, `"cup"`, `"pinch"`
+            /// </summary>
+            /// <example>Tablespoon</example>
+            public string MeasurementUnit { get; init; } = MeasurementUnit;
+            /// <summary>This is the a specific version of the ingredient from a supermarket</summary>
+            public GetProducts.Model LinkingProduct { get; init; } = LinkingProduct;
+        };
+
+        /// <summary>Contains details on one part of how to make this recipe</summary>
+        public record ModelInstruction(int Id, int Order, string Description)
+        {
+            /// <example>1</example>
+            public int Id { get; init; } = Id;
+            /// <summary>Used to generate the order this instruction will appear. Lowest -> Highest</summary>
+            /// <example>1</example>
+            public int Order { get; init; } = Order;
+            /// <summary>Describes what someone should be doing for this instruction</summary>
+            /// <example>Finely chop the garlic</example>
+            public string Description { get; init; } = Description;
+        };
+
+        /// <summary>Used to represent the components of a recipe</summary>
+        public record Model(int Id, string Name, string Description, string Tags, int Servings, int DurationMinutes, DateTime LastModifiedUTC, DateTime CreatedOnUTC, List<ModelIngredient> Ingredients, List<ModelInstruction> Instructions)
+        {
+            /// <summary>Id of the recipe</summary>
+            /// <example>1</example>
+            public int Id { get; init; } = Id;
+            /// <example>Recipe #1</example>
+            public string Name { get; init; } = Name;
+            /// <example>This is my very first recipe</example>
+            public string Description { get; init; } = Description;
+            /// <summary>Comma-separated list of ways to categorise your recipe</summary>
+            /// <example>Quick,Easy,Healthy</example>
+            public string Tags { get; init; } = Tags;
+            /// <summary>The approximate number of people this recipe would serve</summary>
+            /// <example>4</example>
+            public int Servings { get; init; } = Servings;
+            /// <summary>The total length of time it would take to make this recipe on average</summary>
+            /// <example>30</example>
+            public int DurationMinutes { get; init; } = DurationMinutes;
+            /// <summary>The last time the recipe was modified in UTC format</summary>
+            public DateTime LastModifiedUTC { get; init; } = LastModifiedUTC;
+            /// <summary>When this recipe was first created in UTC format</summary>
+            public DateTime CreatedOnUTC { get; init; } = CreatedOnUTC;
+        };
 
         public class Validator : AbstractValidator<Query>
         {

@@ -9,7 +9,23 @@ namespace RecipeShopper.Features.Supermarket
     public class SearchSupermarket
     {
         public record Query(string SearchTerm, SupermarketType[] Supermarkets) : IQuery<Response>;
-        public record Model(int Id, string Name, decimal FullPrice, decimal CurrentPrice);
+
+        /// <summary>Represents a product from a supermarket</summary>
+        public record Model(int Id, string Name, decimal FullPrice, decimal CurrentPrice)
+        {
+            /// <summary>Represents the id of this product from a specific store</summary>
+            /// <example>34578</example>
+            public int Id { get; init; } = Id;
+            /// <summary>Name of the product from the store</summary>
+            /// <example>Cadbury Milk Chocolate Block (180g)</example>
+            public string Name { get; init; } = Name;
+            /// <summary>The normal RRP of the item from this store</summary>
+            /// <example>3.99</example>
+            public decimal FullPrice { get; init; } = FullPrice;
+            /// <summary>The price of the item from the store as of now. Useful for indicating if it is on sale</summary>
+            /// <example>4.99</example>
+            public decimal CurrentPrice { get; init; } = CurrentPrice;
+        };
 
         public class MappingProfile : Profile
         {
