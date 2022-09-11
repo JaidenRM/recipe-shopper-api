@@ -11,7 +11,7 @@ namespace RecipeShopper.Features.Supermarket
         public record Query(string SearchTerm, SupermarketType[] Supermarkets) : IQuery<Response>;
 
         /// <summary>Represents a product from a supermarket</summary>
-        public record Model(int Id, string Name, decimal FullPrice, decimal CurrentPrice)
+        public record Model(int Id, string Name, decimal FullPrice, decimal CurrentPrice, ImageSet ImageUrls)
         {
             /// <summary>Represents the id of this product from a specific store</summary>
             /// <example>34578</example>
@@ -25,8 +25,10 @@ namespace RecipeShopper.Features.Supermarket
             /// <summary>The price of the item from the store as of now. Useful for indicating if it is on sale</summary>
             /// <example>4.99</example>
             public decimal CurrentPrice { get; init; } = CurrentPrice;
-        };
-
+            /// <summary>Varying sizes of the same image at different urls</summary>
+            /// <example>{ Small: "cdn.example.com/img/ball1_small.png", Medium: null, Large: "cdn.example.com/img/ball1_large.png" }</example>
+            public ImageSet ImageUrls { get; init; } = ImageUrls;
+        }
         public class MappingProfile : Profile
         {
             public MappingProfile() => CreateMap<Product, Model>();

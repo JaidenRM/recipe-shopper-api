@@ -104,7 +104,7 @@ namespace RecipeShopper.UnitTests.Features.Recipes
             // #1
             var nullIngredients = new List<CreateRecipe.CreateIngredient>()
             {
-                new CreateRecipe.CreateIngredient(null, 0.75m, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(234567, (int)SupermarketType.Woolworths, null)),
+                new CreateRecipe.CreateIngredient(null, 0.75m, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(234567, (int)SupermarketType.Woolworths, null, null)),
             };
             var nullInstructions = new List<CreateRecipe.CreateInstruction>() {};
 
@@ -117,7 +117,7 @@ namespace RecipeShopper.UnitTests.Features.Recipes
             // #2
             var emptyStrIngredients = new List<CreateRecipe.CreateIngredient>()
             {
-                new CreateRecipe.CreateIngredient("", 0.75m, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(234567, (int)SupermarketType.Woolworths, "")),
+                new CreateRecipe.CreateIngredient("", 0.75m, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(234567, (int)SupermarketType.Woolworths, "", new CreateRecipe.CreateImageSet("", null, "large"))),
             };
             var emptyStrInstructions = new List<CreateRecipe.CreateInstruction>() { };
 
@@ -197,7 +197,7 @@ namespace RecipeShopper.UnitTests.Features.Recipes
             var zeroProductIdIngredients = new List<CreateRecipe.CreateIngredient>()
             {
                 new CreateRecipe.CreateIngredient("Peanut Butter", 2, MeasurementUnit.Tablespoon.ToFriendlyString(), 
-                    new CreateRecipe.CreateProduct(0, (int)SupermarketType.Woolworths, "Mayver's Peanut Butter"))
+                    new CreateRecipe.CreateProduct(0, (int)SupermarketType.Woolworths, "Mayver's Peanut Butter", null))
             };
             var zeroProductIdInstructions = new List<CreateRecipe.CreateInstruction>() { };
 
@@ -211,7 +211,7 @@ namespace RecipeShopper.UnitTests.Features.Recipes
             var minusProductIdIngredients = new List<CreateRecipe.CreateIngredient>()
             {
                 new CreateRecipe.CreateIngredient("Peanut Butter", 2, MeasurementUnit.Tablespoon.ToFriendlyString(), 
-                    new CreateRecipe.CreateProduct(-23453, (int)SupermarketType.Woolworths, "Bega Peanut Butter"))
+                    new CreateRecipe.CreateProduct(-23453, (int)SupermarketType.Woolworths, "Bega Peanut Butter", null))
             };
             var minusProductIdInstructions = new List<CreateRecipe.CreateInstruction>() { };
 
@@ -229,7 +229,7 @@ namespace RecipeShopper.UnitTests.Features.Recipes
             var zeroSupermarketIdIngredients = new List<CreateRecipe.CreateIngredient>()
             {
                 new CreateRecipe.CreateIngredient("Peanut Butter", 2, MeasurementUnit.Tablespoon.ToFriendlyString(),
-                    new CreateRecipe.CreateProduct(52464, 0, "Mayver's Roasted Peanut Butter"))
+                    new CreateRecipe.CreateProduct(52464, 0, "Mayver's Roasted Peanut Butter", new CreateRecipe.CreateImageSet("", "med", null)))
             };
             var zeroSupermarketIdInstructions = new List<CreateRecipe.CreateInstruction>() { };
 
@@ -243,7 +243,7 @@ namespace RecipeShopper.UnitTests.Features.Recipes
             var minusSupermarketIdIngredients = new List<CreateRecipe.CreateIngredient>()
             {
                 new CreateRecipe.CreateIngredient("Peanut Butter", 2, MeasurementUnit.Tablespoon.ToFriendlyString(),
-                    new CreateRecipe.CreateProduct(52464, -432, "Peanut Butter"))
+                    new CreateRecipe.CreateProduct(52464, -432, "Peanut Butter", new CreateRecipe.CreateImageSet("", "med", null)))
             };
             var minusSupermarketIdInstructions = new List<CreateRecipe.CreateInstruction>() { };
 
@@ -261,7 +261,7 @@ namespace RecipeShopper.UnitTests.Features.Recipes
             var nullSupermarketNameIngredients = new List<CreateRecipe.CreateIngredient>()
             {
                 new CreateRecipe.CreateIngredient("Peanut Butter", 2, MeasurementUnit.Tablespoon.ToFriendlyString(),
-                    new CreateRecipe.CreateProduct(52464, (int)SupermarketType.Woolworths, null))
+                    new CreateRecipe.CreateProduct(52464, (int)SupermarketType.Woolworths, null, new CreateRecipe.CreateImageSet("", "med", null)))
             };
             var nullSupermarketNameInstructions = new List<CreateRecipe.CreateInstruction>() { };
 
@@ -275,7 +275,7 @@ namespace RecipeShopper.UnitTests.Features.Recipes
             var emptySupermarketNameIngredients = new List<CreateRecipe.CreateIngredient>()
             {
                 new CreateRecipe.CreateIngredient("Peanut Butter", 2, MeasurementUnit.Tablespoon.ToFriendlyString(),
-                    new CreateRecipe.CreateProduct(52464, (int)SupermarketType.Woolworths, ""))
+                    new CreateRecipe.CreateProduct(52464, (int)SupermarketType.Woolworths, "", null))
             };
             var emptySupermarketNameInstructions = new List<CreateRecipe.CreateInstruction>() { };
 

@@ -63,8 +63,8 @@ namespace RecipeShopper.Data
                 .WithMany(r => r.Ingredients);
             modelBuilder.Entity<Ingredient>()
                 .HasOne(i => i.Product)
-                .WithOne()
-                .HasForeignKey<Ingredient>(i => new { i.ProductId, i.SupermarketId });
+                .WithMany()
+                .HasForeignKey(i => new { i.ProductId, i.SupermarketId });
 
         }
 

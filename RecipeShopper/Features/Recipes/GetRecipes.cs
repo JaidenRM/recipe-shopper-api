@@ -137,7 +137,7 @@ namespace RecipeShopper.Features.Recipes
                         if (i.Product != null)
                         {
                             var foundProduct = products.SingleOrDefault(p => p.Id == i.Product.Id && p.SupermarketId == i.Product.SupermarketId);
-                            product = new GetProducts.Model(i.Product.Id, i.Product.Name, foundProduct.FullPrice, foundProduct.CurrentPrice, i.Product.SupermarketId, i.Product.Supermarket.Name);
+                            product = new GetProducts.Model(i.Product.Id, i.Product.Name, foundProduct.FullPrice, foundProduct.CurrentPrice, i.Product.SupermarketId, i.Product.Supermarket.Name, foundProduct.ModelImage);
                         }
 
                         return new ModelIngredient(i.Id, i.Name, i.Quantity, i.Unit.ToFriendlyString(), product);

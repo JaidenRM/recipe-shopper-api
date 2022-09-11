@@ -49,7 +49,11 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseMiddleware<ExceptionHandlerMiddleware>();
-app.UseCors(c => c.AllowAnyOrigin());
+app.UseCors(c => {
+    c.AllowAnyOrigin();
+    c.AllowAnyHeader();
+    c.AllowAnyMethod();
+});
 
 if (app.Environment.IsDevelopment())
 {

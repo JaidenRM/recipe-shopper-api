@@ -18,8 +18,19 @@ namespace RecipeShopper.Features.Products
         /// <param name="IdsBySupermarketId">SupermarketId is used as a key and an array of productIds for values</param>
         public record Query(Dictionary<int, int[]> IdsBySupermarketId) : IQuery<Response>;
 
+        /// <summary>Various images representing the product</summary>
+        public record ModelImage( string Large, string Medium, string Small)
+        {
+            /// <example>"cdn.example.com/img/ball1_large.png"</example>
+            public string Large { get; init; } = Large;
+            /// <example>"cdn.example.com/img/ball1_medium.png"</example>
+            public string Medium { get; init; } = Medium;
+            /// <example>"cdn.example.com/img/ball1_small.png"</example>
+            public string Small { get; init; } = Small;
+        }
+
         /// <summary>Represents a product from a specific supermarket in regards to an ingredient in a recipe</summary>
-        public record Model(int Id, string Name, decimal FullPrice, decimal CurrentPrice, int SupermarketId, string SupermarketName)
+        public record Model(int Id, string Name, decimal FullPrice, decimal CurrentPrice, int SupermarketId, string SupermarketName, ModelImage ModelImage)
         {
             /// <summary>Represents the id of this product from a specific store</summary>
             /// <example>123</example>
@@ -86,7 +97,8 @@ namespace RecipeShopper.Features.Products
                 var result = await _mediator.Send(query);
                 var supermarketProduct = result.ProductsBySupermarketDict[supermarketType].FirstOrDefault();
 
-                return new Model(product.Id, product.Name, supermarketProduct?.FullPrice ?? 0, supermarketProduct?.CurrentPrice ?? 0, product.Supermarket.Id, product.Supermarket.Name);
+                var modelImage = new ModelImage(supermarketProduct?.ImageUrls?.Large, supermarketProduct?.ImageUrls?.Medium, supermarketProduct?.ImageUrls?.Small);
+                return new Model(product.Id, product.Name, supermarketProduct?.FullPrice ?? 0, supermarketProduct?.CurrentPrice ?? 0, product.Supermarket.Id, product.Supermarket.Name, modelImage);
             }
         }
 

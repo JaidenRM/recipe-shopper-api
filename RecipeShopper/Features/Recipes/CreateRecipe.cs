@@ -30,8 +30,15 @@ namespace RecipeShopper.Features.Recipes
             public string Tags { get; init; } = Tags;
         };
 
+        public record CreateImageSet(string Small, string Medium, string Large)
+        {
+            public string Small { get; init; } = Small;
+            public string Medium { get; init; } = Medium;
+            public string Large { get; init; } = Large;
+        }
+
         /// <summary>The supermarket representation of the mention ingredient</summary>
-        public record CreateProduct(int Id, int SupermarketId, string Name)
+        public record CreateProduct(int Id, int SupermarketId, string Name, CreateImageSet ImageSet)
         {
             /// <summary>Represents the id of this product from a specific store</summary>
             /// <example>345679</example>
@@ -42,6 +49,8 @@ namespace RecipeShopper.Features.Recipes
             /// <summary>The internal id used to track which supermarket this product is from</summary>
             /// <example>2</example>
             public int SupermarketId { get; init; } = SupermarketId;
+
+            public CreateImageSet ImageSet { get; init; } = ImageSet;
         };
 
         /// <summary>Contains details of a specific ingredient used in this recipe</summary>
@@ -135,11 +144,12 @@ namespace RecipeShopper.Features.Recipes
             public async Task<int> Handle(Command request, CancellationToken cancellationToken)
             {
                 var recipe = _mapper.Map<Recipe>(request);
+                await _db.BeginTransactionAsync();
 
                 await _db.Recipes.AddAsync(recipe);
-
                 await _db.SaveChangesAsync();
 
+                await _db.CommitTransactionAsync();
                 return recipe.Id;
             }
         }

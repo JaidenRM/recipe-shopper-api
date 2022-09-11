@@ -32,11 +32,11 @@ namespace RecipeShopper.Domain.Enums
                 case MeasurementUnit.Grams:
                     return "grams";
                 case MeasurementUnit.Kilograms:
-                    return "kilograms";
+                    return "kilogram";
                 case MeasurementUnit.Millilitres:
-                    return "millilitres";
+                    return "millilitre";
                 case MeasurementUnit.Litres:
-                    return "litres";
+                    return "litre";
                 case MeasurementUnit.Cup:
                     return "cup";
                 case MeasurementUnit.Pinch:
@@ -60,11 +60,11 @@ namespace RecipeShopper.Domain.Enums
                     return MeasurementUnit.Tablespoon;
                 case "grams":
                     return MeasurementUnit.Grams;
-                case "kilograms":
+                case "kilogram":
                     return MeasurementUnit.Kilograms;
-                case "millilitres":
+                case "millilitre":
                     return MeasurementUnit.Millilitres;
-                case "litres":
+                case "litre":
                     return MeasurementUnit.Litres;
                 case "cup":
                     return MeasurementUnit.Cup;

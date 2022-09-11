@@ -21,10 +21,10 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
         {
             var ingredients = new List<CreateRecipe.CreateIngredient>()
             {
-                new CreateRecipe.CreateIngredient("Strawberries", 0.75m, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(298967, (int)SupermarketType.Woolworths, "Strawberries")),
+                new CreateRecipe.CreateIngredient("Strawberries", 0.75m, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(298967, (int)SupermarketType.Woolworths, "Strawberries", new CreateRecipe.CreateImageSet("small1", "medium1", "large1"))),
                 new CreateRecipe.CreateIngredient("Peanut Butter", 2, MeasurementUnit.Tablespoon.ToFriendlyString(), null),
                 new CreateRecipe.CreateIngredient("Protein Powder (1 scoop if desired; Vanilla/Raw)", 25, MeasurementUnit.Grams.ToFriendlyString(), null),
-                new CreateRecipe.CreateIngredient("Coconut Water", 1, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(23457889, (int)SupermarketType.Woolworths, "H20 Coconut Water")),
+                new CreateRecipe.CreateIngredient("Coconut Water", 1, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(23457889, (int)SupermarketType.Woolworths, "H20 Coconut Water", null)),
             };
             var instructions = new List<CreateRecipe.CreateInstruction>()
             {
@@ -59,10 +59,10 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
         {
             var ingredients = new List<CreateRecipe.CreateIngredient>()
             {
-                new CreateRecipe.CreateIngredient("Strawberries", 0.75m, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(298967, (int)SupermarketType.Woolworths, "Strawberries")),
+                new CreateRecipe.CreateIngredient("Strawberries", 0.75m, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(298967, (int)SupermarketType.Woolworths, "Strawberries", null)),
                 new CreateRecipe.CreateIngredient("Peanut Butter", 2, MeasurementUnit.Tablespoon.ToFriendlyString(), null),
                 new CreateRecipe.CreateIngredient("Protein Powder (1 scoop if desired; Vanilla/Raw)", 25, MeasurementUnit.Grams.ToFriendlyString(), null),
-                new CreateRecipe.CreateIngredient("Coconut Water", 1, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(23457889, (int)SupermarketType.Woolworths, "H20 Coconut Water")),
+                new CreateRecipe.CreateIngredient("Coconut Water", 1, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(23457889, (int)SupermarketType.Woolworths, "H20 Coconut Water", new CreateRecipe.CreateImageSet("small", "medium", "large"))),
             };
             var instructions = new List<CreateRecipe.CreateInstruction>()
             {
@@ -77,11 +77,11 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
 
             var ingredients2 = new List<CreateRecipe.CreateIngredient>()
             {
-                new CreateRecipe.CreateIngredient("Chicken Thigh", 600, MeasurementUnit.Grams.ToFriendlyString(), new CreateRecipe.CreateProduct(255790, (int)SupermarketType.Woolworths, "Strawberries")),
+                new CreateRecipe.CreateIngredient("Chicken Thigh", 600, MeasurementUnit.Grams.ToFriendlyString(), new CreateRecipe.CreateProduct(255790, (int)SupermarketType.Woolworths, "Strawberries", new CreateRecipe.CreateImageSet("small2", "medium2", "large2"))),
                 new CreateRecipe.CreateIngredient("Peanut Butter", 2, MeasurementUnit.Tablespoon.ToFriendlyString(), null),
                 new CreateRecipe.CreateIngredient("Satay", 250, MeasurementUnit.Grams.ToFriendlyString(), null),
-                new CreateRecipe.CreateIngredient("Coconut Milk", 1, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(345367, (int)SupermarketType.Woolworths, "H20 Coconut Water")),
-                new CreateRecipe.CreateIngredient("Thai Red Curry Paste", 1, MeasurementUnit.Tablespoon.ToFriendlyString(), new CreateRecipe.CreateProduct(43379, (int)SupermarketType.Woolworths, "Thai Red Curry Paste")),
+                new CreateRecipe.CreateIngredient("Coconut Milk", 1, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(345367, (int)SupermarketType.Woolworths, "H20 Coconut Water", null)),
+                new CreateRecipe.CreateIngredient("Thai Red Curry Paste", 1, MeasurementUnit.Tablespoon.ToFriendlyString(), new CreateRecipe.CreateProduct(43379, (int)SupermarketType.Woolworths, "Thai Red Curry Paste", new CreateRecipe.CreateImageSet("small3", "medium3", "large3"))),
                 new CreateRecipe.CreateIngredient("Curry Powder", 1, MeasurementUnit.Teaspoon.ToFriendlyString(), null),
             };
             var instructions2 = new List<CreateRecipe.CreateInstruction>()
@@ -96,9 +96,9 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
 
             var ingredients3 = new List<CreateRecipe.CreateIngredient>()
             {
-                new CreateRecipe.CreateIngredient("Strawberries", 1, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(96574, (int)SupermarketType.Woolworths, "Strawberries")),
+                new CreateRecipe.CreateIngredient("Strawberries", 1, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(96574, (int)SupermarketType.Woolworths, "Strawberries", new CreateRecipe.CreateImageSet("small4", "medium4", "large4"))),
                 new CreateRecipe.CreateIngredient("Water", 0.5m, MeasurementUnit.Cup.ToFriendlyString(), null),
-                new CreateRecipe.CreateIngredient("Sugar", 0.5m, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(227898, (int)SupermarketType.Woolworths, "White Sugar")),
+                new CreateRecipe.CreateIngredient("Sugar", 0.5m, MeasurementUnit.Cup.ToFriendlyString(), new CreateRecipe.CreateProduct(227898, (int)SupermarketType.Woolworths, "White Sugar", new CreateRecipe.CreateImageSet("small5", "medium5", "large5"))),
             };
             var instructions3 = new List<CreateRecipe.CreateInstruction>()
             {
