@@ -60,7 +60,7 @@ namespace RecipeShopper.UnitTests.Services
             var mockedSupermarketService = new Mock<ISupermarketService>();
 
             var testSupermarket = new Supermarket(SupermarketType.Woolworths, SupermarketType.Woolworths.ToFriendlyString());
-            var testProduct = new Product(1, "Naisuu", 42.69m, 33.33m, testSupermarket);
+            var testProduct = new Product(1, "Naisuu", 42.69m, 33.33m, testSupermarket, null);
 
             // setup mocks
             mockedSupermarketService
@@ -86,9 +86,9 @@ namespace RecipeShopper.UnitTests.Services
             var testSupermarket = new Supermarket(SupermarketType.Woolworths, SupermarketType.Woolworths.ToFriendlyString());
             var testProducts = new List<Product>()
             {
-                new Product(1, "Naisuu", 42.69m, 33.33m, testSupermarket),
-                new Product(145, "Watermaloooone", 4.99m, 3.33m, testSupermarket),
-                new Product(911, "Me", 5m, 5m, testSupermarket),
+                new Product(1, "Naisuu", 42.69m, 33.33m, testSupermarket, null),
+                new Product(145, "Watermaloooone", 4.99m, 3.33m, testSupermarket, null),
+                new Product(911, "Me", 5m, 5m, testSupermarket, null),
             };
 
             // setup mocks

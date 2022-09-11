@@ -23,7 +23,10 @@ namespace RecipeShopper.Infrastructure.Supermarkets.Woolworths
                     opt => opt.MapFrom(src => src.WasPrice ?? 0))
                 .ForCtorParam(
                     "supermarket",
-                    opt => opt.MapFrom(src => new Supermarket(SupermarketType.Woolworths, SupermarketType.Woolworths.ToFriendlyString())));
+                    opt => opt.MapFrom(src => new Supermarket(SupermarketType.Woolworths, SupermarketType.Woolworths.ToFriendlyString())))
+                .ForCtorParam(
+                    "imageUrls",
+                    opt => opt.MapFrom(src => new ImageSet(src.SmallImageFile, src.MediumImageFile, src.LargeImageFile)));
         }
     }
 }

@@ -13,6 +13,9 @@
         public bool IsBundle { get; set; }
         public bool IsOnSpecial { get; set; }
         public string Unit { get; set; }
+        public string SmallImageFile { get; set; }
+        public string MediumImageFile { get; set; }
+        public string LargeImageFile { get; set; }
         // Is ID
         public int Stockcode { get; set; }
     }

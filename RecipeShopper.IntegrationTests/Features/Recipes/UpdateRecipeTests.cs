@@ -331,9 +331,9 @@ namespace RecipeShopper.IntegrationTests.Features.Recipes
             var rnd = new Random();
             var ingredients = new List<CreateRecipe.CreateIngredient>()
             {
-                new CreateRecipe.CreateIngredient("Sliced Cheese", 2, MeasurementUnit.Each.ToFriendlyString(), new CreateRecipe.CreateProduct(234567, (int)SupermarketType.Woolworths, "Cheese")),
+                new CreateRecipe.CreateIngredient("Sliced Cheese", 2, MeasurementUnit.Each.ToFriendlyString(), new CreateRecipe.CreateProduct(234567, (int)SupermarketType.Woolworths, "Cheese", new CreateRecipe.CreateImageSet("small1", "medium1", "large1"))),
                 new CreateRecipe.CreateIngredient("Butter/Margarine", 1, MeasurementUnit.None.ToFriendlyString(), null),
-                new CreateRecipe.CreateIngredient("Sliced Bread", 2, MeasurementUnit.Each.ToFriendlyString(), new CreateRecipe.CreateProduct(985446, (int)SupermarketType.Woolworths, "White Bread")),
+                new CreateRecipe.CreateIngredient("Sliced Bread", 2, MeasurementUnit.Each.ToFriendlyString(), new CreateRecipe.CreateProduct(985446, (int)SupermarketType.Woolworths, "White Bread", new CreateRecipe.CreateImageSet("small2", "medium2", "large2"))),
             };
             var instructions = new List<CreateRecipe.CreateInstruction>()
             {

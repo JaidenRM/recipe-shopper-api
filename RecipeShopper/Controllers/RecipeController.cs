@@ -38,7 +38,7 @@ namespace RecipeShopper.Controllers
         /// <returns>No data is returned</returns>
         /// <response code="201">Location of the new recipe</response>
         [HttpPost]
-        public async Task<ActionResult> CreateRecipe([FromBody]CreateRecipe.Command recipe)
+        public async Task<ActionResult> CreateRecipe([FromBody] CreateRecipe.Command recipe)
         {
             var resp = await _mediator.Send(recipe);
 
@@ -50,10 +50,11 @@ namespace RecipeShopper.Controllers
         ///     Used to update a specific recipe with new values. 
         ///     Existing values must be repassed to the command to be kept otherwise they will be overwritten by the command's values.
         /// </summary>
+        /// <param name="id">Id of the recipe to update</param>
         /// <param name="recipe">Contains new values to update an existing recipe with</param>
         /// <returns>No data is returned</returns>
-        [HttpPut]
-        public async Task<ActionResult> UpdateRecipe(UpdateRecipe.Command recipe)
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> UpdateRecipe(int id, UpdateRecipe.Command recipe)
         {
             await _mediator.Send(recipe);
 
