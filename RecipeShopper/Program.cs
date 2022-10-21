@@ -1,5 +1,6 @@
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using RecipeShopper.Application.Interfaces;
 using RecipeShopper.Application.Middlewares;
@@ -15,6 +16,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddControllers()
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
+builder.Services.AddApiVersioning(options =>
+{
+    options.ReportApiVersions = true;
+    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+
+    options.ApiVersionReader = new HeaderApiVersionReader("X-API-Header");
+});
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviorPipeline<,>));
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
@@ -26,6 +35,12 @@ builder.Services.AddDbContext<RecipeShopperContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Dev")));
 builder.Services.AddMediatR(typeof(Program));
 builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddVersionedApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+});
 builder.Services.AddSwaggerGen(opts =>
 {
     opts.CustomSchemaIds(type => type.ToString().Replace('+', '.'));

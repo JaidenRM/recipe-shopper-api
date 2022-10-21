@@ -7,7 +7,8 @@ using RecipeShopper.Features.Supermarket;
 
 namespace RecipeShopper.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/supermarket")]
     [ApiController]
     public class SupermarketController : ControllerBase
     {

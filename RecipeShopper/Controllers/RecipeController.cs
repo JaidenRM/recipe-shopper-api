@@ -4,7 +4,8 @@ using RecipeShopper.Features.Recipes;
 
 namespace RecipeShopper.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/recipe")]
     [ApiController]
     public class RecipeController : ControllerBase
     {
